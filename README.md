@@ -1,4 +1,4 @@
-# stay-productive-app
+# :gem: stay-productive-app
 API for task management application with pomodoro features 
 
 
