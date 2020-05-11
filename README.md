@@ -1,10 +1,8 @@
 # :gem: stay-productive-api-node
 
-API for task management application with pomodoro features 
+API for task management application with pomodoro features. API built with Nodejs, Express, MongoDB.
 
 
-
-
-## Documentatin
+## Documentation
 Documentation coming soon!
 
