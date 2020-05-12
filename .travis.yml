@@ -9,5 +9,5 @@ install:
   - npm ci
 
 script:
-  -npm test
+  -npm start
 
