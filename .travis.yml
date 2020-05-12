@@ -3,11 +3,9 @@ sudo: false
 language: node_js
 
 node_js:
-  - 12.16.3
+  - 11.10.1
 
 install:
   - npm ci
 
-script:
-  -npm test
-
+script: -npm test
