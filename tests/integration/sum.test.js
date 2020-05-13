@@ -1,3 +1,5 @@
+// Testing the function
+
 describe('test', () => {
   it('should return the correct sum', () => {
     const result = 7;
