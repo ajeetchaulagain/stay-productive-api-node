@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js --exec babel-node -e js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint '**/*.js'",
+    "test:coverage": "jest --coverage",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info"
   },
   "repository": {
     "type": "git",
@@ -33,6 +36,7 @@
     "@babel/core": "^7.9.6",
     "@babel/node": "^7.8.7",
     "@babel/preset-env": "^7.9.6",
+    "coveralls": "^3.1.0",
     "eslint": "^6.8.0",
     "eslint-config-airbnb": "^18.1.0",
     "eslint-config-airbnb-base": "^14.1.0",

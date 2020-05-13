@@ -1,8 +1,8 @@
-// Testing the function
+import sum from '../../../util/sum';
 
 describe('test', () => {
   it('should return the correct sum', () => {
-    const result = 7;
+    const result = sum(4, 3);
     expect(result).toBe(7);
   });
 });
