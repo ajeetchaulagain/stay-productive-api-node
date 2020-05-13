@@ -3,10 +3,10 @@ sudo: false
 language: node_js
 
 node_js:
-  - '8'
+  - '10'
 
 install:
-  - npm ci
+  - npm i
 
 script:
   - npm test
