@@ -8,7 +8,8 @@
     "test": "jest",
     "lint": "eslint '**/*.js'",
     "test:coverage": "jest --coverage",
-    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info"
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+    "setDebug": "export DEBUG=app:*"
   },
   "repository": {
     "type": "git",
@@ -29,6 +30,7 @@
   },
   "homepage": "https://github.com/ajeetchaulagain/stay-productive-app#readme",
   "dependencies": {
+    "@hapi/joi": "^17.1.1",
     "config": "^3.3.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
