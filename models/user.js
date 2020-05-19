@@ -29,8 +29,9 @@ const userSchema = new mongoose.Schema({
 
 const validateUser = (user) => {
   const userValidationSchema = Joi.object({
-    name: Joi.string().required(),
-    email: Joi.string().required(),
+    name: Joi.string().required().max(55),
+    email: Joi.string().required().max(255),
+    password: Joi.string().required().max(1024),
   });
   return userValidationSchema.validate(user);
 };
