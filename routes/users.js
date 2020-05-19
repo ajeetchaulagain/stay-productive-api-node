@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { userRoutesDebug as debug } from '../debugNamespaces/debug';
 import { User, validateUser } from '../models/user';
-import asyncMiddleware from '../middlewares/async';
 import pick from '../util/pick-object-property';
 
 const router = Router();
@@ -27,14 +26,8 @@ router.post('/', async (req, res) => {
     password: req.body.password,
     projects: null,
   });
-
-  try {
-    const result = await user.save();
-    debug('user registered!', result);
-    return res.send(pick(result, ['name', 'email']));
-  } catch (ex) {
-    console.log('something wrong');
-  }
+  const result = await user.save();
+  return res.send(pick(result, ['name', 'email']));
 });
 
 export default router;
