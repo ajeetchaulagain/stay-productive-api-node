@@ -1,6 +1,0 @@
-{
-  "appDetails": {
-    "appName": "Stay Productive API Node"
-  },
-  "db": "mongodb://localhost/stay-productive"
-}

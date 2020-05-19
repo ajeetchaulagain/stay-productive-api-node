@@ -1,8 +1,9 @@
 import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
+import config from 'config';
 import Joi from '@hapi/joi';
 import projectSchema from './project';
 
-// Creating userSchema
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -27,6 +28,15 @@ const userSchema = new mongoose.Schema({
   projects: [projectSchema],
 });
 
+// eslint-disable-next-line func-names
+userSchema.methods.generateAuthToken = function () {
+  // eslint-disable-next-line no-underscore-dangle
+  const token = jwt.sign({ _id: this._id }, config.get('jwtPrivateKey'));
+  return token;
+};
+
+const User = mongoose.model('User', userSchema);
+
 const validateUser = (user) => {
   const userValidationSchema = Joi.object({
     name: Joi.string().required().max(55),
@@ -35,7 +45,5 @@ const validateUser = (user) => {
   });
   return userValidationSchema.validate(user);
 };
-
-const User = mongoose.model('User', userSchema);
 
 export { User, validateUser };

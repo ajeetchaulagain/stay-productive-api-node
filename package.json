@@ -31,10 +31,12 @@
   "homepage": "https://github.com/ajeetchaulagain/stay-productive-app#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "bcrypt": "^4.0.1",
     "config": "^3.3.1",
     "debug": "^4.1.1",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",
+    "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.14",
     "nodemon": "^2.0.3"
   },

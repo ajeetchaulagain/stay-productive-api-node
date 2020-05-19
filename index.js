@@ -6,14 +6,20 @@ import { startDebug as debug } from './debugNamespaces/debug';
 import error from './middlewares/error';
 
 import users from './routes/users';
+import auth from './routes/auth';
 
-// debug namespaces
+const app = express();
 
+if (!config.get('jwtPrivateKey')) {
+  debug('FATAL ERROR: jwtPrivateKey is not defined');
+  process.exit(1);
+}
 // mongodb connection
 mongoose
   .connect(config.get('db'), {
     useNewUrlParser: true,
     useUnifiedTopology: true,
+    useFindAndModify: false,
   })
   .then(() => {
     debug('Connected to database');
@@ -24,10 +30,9 @@ mongoose
 
 // middlewares
 
-const app = express();
 app.use(express.json());
 app.use('/api/users', users);
-
+app.use('/api/auth', auth);
 app.use(error);
 
 const PORT = process.env.PORT || 3000;
