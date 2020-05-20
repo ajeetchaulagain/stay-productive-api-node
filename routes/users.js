@@ -1,15 +1,11 @@
 import { Router } from 'express';
 import bcrypt from 'bcrypt';
-import { userRoutesDebug as debug } from '../debugNamespaces/debug';
+import { usersRouteDebug as debug } from '../debug/debug';
 import { User, validateUser } from '../models/user';
 import auth from '../middlewares/auth';
 import pick from '../util/pick-object-property';
 
 const router = Router();
-
-router.get('/', (req, res) => {
-  res.send('Hi there');
-});
 
 router.post('/', async (req, res) => {
   const { error } = validateUser(req.body);
@@ -22,7 +18,7 @@ router.post('/', async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: req.body.password,
-    projects: null,
+    projects: [],
   });
 
   const salt = await bcrypt.genSalt(10);
@@ -37,9 +33,7 @@ router.post('/', async (req, res) => {
 
 // Assumption : decided not to pass user ID from client side
 // for security purpose. Instead id will be retrieved from JWT Payload
-
 router.delete('/delete', auth, async (req, res) => {
-  // eslint-disable-next-line no-underscore-dangle
   const user = await User.findByIdAndRemove(req.user._id);
   if (!user) return res.status(400).send('No such user exist');
   debug('Deleted User:', user);

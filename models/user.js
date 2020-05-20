@@ -2,7 +2,7 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import config from 'config';
 import Joi from '@hapi/joi';
-import projectSchema from './project';
+import { projectSchema } from './project';
 
 const userSchema = new mongoose.Schema({
   name: {
@@ -28,9 +28,7 @@ const userSchema = new mongoose.Schema({
   projects: [projectSchema],
 });
 
-// eslint-disable-next-line func-names
 userSchema.methods.generateAuthToken = function () {
-  // eslint-disable-next-line no-underscore-dangle
   const token = jwt.sign({ _id: this._id }, config.get('jwtPrivateKey'));
   return token;
 };

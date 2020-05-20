@@ -2,11 +2,12 @@ import 'express-async-errors';
 import express from 'express';
 import mongoose from 'mongoose';
 import config from 'config';
-import { startDebug as debug } from './debugNamespaces/debug';
+import { startDebug as debug } from './debug/debug';
 import error from './middlewares/error';
 
 import users from './routes/users';
 import auth from './routes/auth';
+import projects from './routes/projects';
 
 const app = express();
 
@@ -33,6 +34,7 @@ mongoose
 app.use(express.json());
 app.use('/api/users', users);
 app.use('/api/auth', auth);
+app.use('/api/projects', projects);
 app.use(error);
 
 const PORT = process.env.PORT || 3000;
