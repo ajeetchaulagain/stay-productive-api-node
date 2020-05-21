@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 import Joi from '@hapi/joi';
-import projectTaskSchema from './task';
+import { projectTaskSchema } from './task';
 
 const projectSchema = new mongoose.Schema({
   name: {

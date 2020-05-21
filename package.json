@@ -31,6 +31,7 @@
   "homepage": "https://github.com/ajeetchaulagain/stay-productive-app#readme",
   "dependencies": {
     "@hapi/joi": "^17.1.1",
+    "@hapi/joi-date": "^2.0.1",
     "bcrypt": "^4.0.1",
     "config": "^3.3.1",
     "debug": "^4.1.1",

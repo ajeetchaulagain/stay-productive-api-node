@@ -1,9 +1,34 @@
 import mongoose from 'mongoose';
+import Joi from '@hapi/joi';
 
 const projectTaskSchema = new mongoose.Schema({
-  name: String,
-  completed: Boolean,
-  dueDate: Date,
+  name: {
+    type: String,
+    required: true,
+    minlength: 3,
+    maxlength: 55,
+  },
+  completed: {
+    type: Boolean,
+    default: false,
+  },
+  dueDate: {
+    type: Date,
+    default: null,
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
 });
 
-export default projectTaskSchema;
+const validateTask = (task) => {
+  const taskValidationSchema = Joi.object({
+    name: Joi.string().required().min(3).max(55),
+    completed: Joi.boolean(),
+    dueDate: Joi.date(),
+  });
+  return taskValidationSchema.validate(task);
+};
+
+export { projectTaskSchema, validateTask };

@@ -4,5 +4,7 @@ import debug from 'debug';
 const usersRouteDebug = debug('app:usersRoute');
 const startDebug = debug('app:start');
 const projectsRouteDebug = debug('app:projectsRoute');
+const tasksRouteDebug = debug('app:tasksRoute');
 
-export { usersRouteDebug, startDebug, projectsRouteDebug };
+// eslint-disable-next-line object-curly-newline
+export { usersRouteDebug, startDebug, projectsRouteDebug, tasksRouteDebug };
