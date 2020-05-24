@@ -4,7 +4,6 @@ import auth from '../middlewares/auth';
 import { User } from '../models/user';
 import { validateProject } from '../models/project';
 import { validateObjectId } from '../middlewares/validateObjectId';
-import createProject from '../services/project';
 
 const router = Router();
 
