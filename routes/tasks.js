@@ -17,7 +17,6 @@ router.get('/:projectID', [auth, validateProjectId], async (req, res) => {
   debug(req.params);
   const project = user.projects.id(req.params.projectID);
   if (!project) return res.status(404).send("Given project doesn't exist");
-
   return res.send(project.tasks);
 });
 
@@ -27,12 +26,10 @@ router.post('/:projectID', [auth, validateProjectId], async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findById(req.user._id);
-  debug(req.params);
 
   const { projects } = user;
   const project = projects.id(req.params.projectID);
   if (!project) return res.status(404).send("Given project doesn't exist");
-  debug(project);
 
   const { tasks } = project;
   const task = tasks.create(req.body);
@@ -47,11 +44,13 @@ router.put('/:projectID/:id', [auth, validateObjectId], async (req, res) => {
   const { error } = validateTask(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
+  // Check if project exist
   const user = await User.findById(req.user._id);
   const { projects } = user;
   const project = projects.id(req.params.projectID);
   if (!project) return res.status(404).send("Given project doesn't exist");
 
+  // Check if task for that project exist
   const { tasks } = project;
   const task = tasks.id(req.params.id);
   if (!task) return res.status(404).send('Task with given ID was not found');
@@ -71,6 +70,7 @@ router.delete('/:projectID/:id', [auth, validateObjectId], async (req, res) => {
   const user = await User.findById(req.user._id);
 
   const { projects } = user;
+
   const project = projects.id(req.params.projectID);
   if (!project) return res.status(404).send("Given project doesn't exist");
 

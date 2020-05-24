@@ -4,6 +4,7 @@ import auth from '../middlewares/auth';
 import { User } from '../models/user';
 import { validateProject } from '../models/project';
 import { validateObjectId } from '../middlewares/validateObjectId';
+import createProject from '../services/project';
 
 const router = Router();
 
@@ -42,6 +43,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
 
   const project = user.projects.id(req.params.id);
   if (!project) return res.status(400).send('Given project doesnt exist');
+
   project.name = req.body.name;
   await user.save();
 
