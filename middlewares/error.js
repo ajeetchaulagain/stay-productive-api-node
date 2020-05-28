@@ -1,4 +1,4 @@
-import winstonLogger from '../startup/logging';
+import winstonLogger from '../logger/logger';
 
 // eslint-disable-next-line no-unused-vars
 const error = (err, req, res, next) => {

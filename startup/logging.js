@@ -1,14 +1,13 @@
-import winston from 'winston';
-import 'winston-mongodb';
-import config from 'config';
+import 'express-async-errors';
+import { transports, exceptions } from 'winston';
 
-export default winston.createLogger({
-  level: 'error',
-  transports: [
-    new winston.transports.File({
-      filename: 'logfile.log',
-    }),
-    new winston.transports.Console(),
-    new winston.transports.MongoDB({ db: config.get('logDB') }),
-  ],
-});
+export default () => {
+  // process uncaughtException handling through winston
+  exceptions.handle([
+    new transports.File({ filename: 'uncaughtExceptions.json' }),
+    new transports.Console(),
+  ]);
+  process.on('unhandledRejection', (ex) => {
+    throw ex;
+  });
+};

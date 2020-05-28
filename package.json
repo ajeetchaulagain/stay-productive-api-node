@@ -9,7 +9,9 @@
     "lint": "eslint '**/*.js'",
     "test:coverage": "jest --coverage",
     "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
-    "setDebug": "export DEBUG=app:*"
+    "setDebug": "export DEBUG=app:*",
+    "start:mongo": "brew services start mongodb-community",
+    "stop:mongo": "brew services stop mongodb-community"
   },
   "repository": {
     "type": "git",

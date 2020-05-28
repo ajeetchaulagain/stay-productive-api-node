@@ -1,53 +1,18 @@
-import 'express-async-errors';
 import express from 'express';
-import mongoose from 'mongoose';
-import config from 'config';
-import { transports, exceptions } from 'winston';
-
-import { startDebug as debug } from './debug/debug';
-import error from './middlewares/error';
-
-import users from './routes/users';
-import auth from './routes/auth';
-import projects from './routes/projects';
-import tasks from './routes/tasks';
+import { infoLogger } from './logger/logger';
+import initializeRoutes from './startup/routes';
+import initializeDatabase from './startup/db';
+import initializeLogging from './startup/logging';
+import initializeConfig from './startup/config';
 
 const app = express();
 
-// process exception handling through winston
-exceptions.handle(new transports.File({ filename: 'uncaughtExceptions.log' }));
-process.on('unhandledRejection', (ex) => {
-  throw ex;
-});
-
-if (!config.get('jwtPrivateKey')) {
-  debug('FATAL ERROR: jwtPrivateKey is not defined');
-  process.exit(1);
-}
-
-// mongodb connection
-mongoose
-  .connect(config.get('db'), {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-  })
-  .then(() => {
-    debug('Connected to database');
-  })
-  .catch((err) => {
-    debug('Could not connect to database', err);
-  });
-
-// middlewares
-app.use(express.json());
-app.use('/api/users', users);
-app.use('/api/auth', auth);
-app.use('/api/projects', projects);
-app.use('/api/tasks', tasks);
-app.use(error);
+initializeLogging();
+initializeRoutes(app);
+initializeDatabase();
+initializeConfig();
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  debug(`App is listening at ${PORT}`);
+  infoLogger.info(`App is listening at ${PORT}`);
 });
