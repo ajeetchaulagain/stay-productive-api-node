@@ -2,6 +2,8 @@ import 'express-async-errors';
 import express from 'express';
 import mongoose from 'mongoose';
 import config from 'config';
+import { transports, exceptions } from 'winston';
+
 import { startDebug as debug } from './debug/debug';
 import error from './middlewares/error';
 
@@ -12,10 +14,17 @@ import tasks from './routes/tasks';
 
 const app = express();
 
+// process exception handling through winston
+exceptions.handle(new transports.File({ filename: 'uncaughtExceptions.log' }));
+process.on('unhandledRejection', (ex) => {
+  throw ex;
+});
+
 if (!config.get('jwtPrivateKey')) {
   debug('FATAL ERROR: jwtPrivateKey is not defined');
   process.exit(1);
 }
+
 // mongodb connection
 mongoose
   .connect(config.get('db'), {
