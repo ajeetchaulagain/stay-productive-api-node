@@ -1,4 +1,6 @@
 import winston from 'winston';
+import 'winston-mongodb';
+import config from 'config';
 
 export default winston.createLogger({
   level: 'error',
@@ -7,5 +9,6 @@ export default winston.createLogger({
       filename: 'logfile.log',
     }),
     new winston.transports.Console(),
+    new winston.transports.MongoDB({ db: config.get('logDB') }),
   ],
 });
