@@ -18,7 +18,6 @@ router.get('/', auth, async (req, res) => {
 
 // Create a project for logged in user
 router.post('/', auth, async (req, res) => {
-  throw new Error('could not get the projects');
   const { error } = validateProject(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
