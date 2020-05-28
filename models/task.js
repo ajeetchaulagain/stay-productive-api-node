@@ -25,7 +25,7 @@ const projectTaskSchema = new mongoose.Schema({
 const validateTask = (task) => {
   const taskValidationSchema = Joi.object({
     name: Joi.string().required().min(3).max(55),
-    completed: Joi.boolean(),
+    completed: Joi.boolean().required(),
     dueDate: Joi.date(),
   });
   return taskValidationSchema.validate(task);

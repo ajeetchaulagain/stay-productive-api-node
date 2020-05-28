@@ -7,8 +7,8 @@ import { validateObjectId } from '../middlewares/validateObjectId';
 
 const router = Router();
 
-// Get all tasks for a project with id - projectID
-router.get('/:projectID', auth, async (req, res) => {
+// Get all the projects for logged in user
+router.get('/', auth, async (req, res) => {
   const user = await User.findById(req.user._id);
   if (user.projects.length === 0) {
     return res.status(404).send('No any projects');
@@ -16,6 +16,7 @@ router.get('/:projectID', auth, async (req, res) => {
   return res.send(user.projects);
 });
 
+// Create a project for logged in user
 router.post('/', auth, async (req, res) => {
   const { error } = validateProject(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -34,6 +35,7 @@ router.post('/', auth, async (req, res) => {
   return res.send(project);
 });
 
+// update the project with id of 'id'
 router.put('/:id', [auth, validateObjectId], async (req, res) => {
   const { error } = validateProject(req.body);
   if (error) return res.status(400).send(error.details[0].message);
@@ -49,6 +51,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   return res.send(project);
 });
 
+// Delete the project of id 'id'
 router.delete('/:id', [auth, validateObjectId], async (req, res) => {
   const user = await User.findById(req.user._id);
 

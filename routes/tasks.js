@@ -11,43 +11,46 @@ import { tasksRouteDebug as debug } from '../debug/debug';
 
 const router = Router();
 
-// Gets all the task for provided project id in route parameter
-router.get('/:projectID', [auth, validateProjectId], async (req, res) => {
+// Route for getting all the task of particular project
+router.get('/:projectId', [auth, validateProjectId], async (req, res) => {
   const user = await User.findById(req.user._id);
   debug(req.params);
-  const project = user.projects.id(req.params.projectID);
+  const project = user.projects.id(req.params.projectId);
   if (!project) return res.status(404).send("Given project doesn't exist");
   return res.send(project.tasks);
 });
 
-// Creates the task for a project with given id.
-router.post('/:projectID', [auth, validateProjectId], async (req, res) => {
+// Route for creating task
+router.post('/:projectId', [auth, validateProjectId], async (req, res) => {
   const { error } = validateTask(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findById(req.user._id);
 
+  // Checking if project exist or not
   const { projects } = user;
-  const project = projects.id(req.params.projectID);
+  const project = projects.id(req.params.projectId);
   if (!project) return res.status(404).send("Given project doesn't exist");
 
+  // Creating task
   const { tasks } = project;
   const task = tasks.create(req.body);
+  debug('task', task);
 
   tasks.push(task);
   await user.save();
   return res.send(task);
 });
 
-// update task with id in a project with projectID
-router.put('/:projectID/:id', [auth, validateObjectId], async (req, res) => {
+// Route for updating the task of particular project
+router.put('/:projectId/:id', [auth, validateObjectId], async (req, res) => {
   const { error } = validateTask(req.body);
   if (error) return res.status(400).send(error.details[0].message);
 
   // Check if project exist
   const user = await User.findById(req.user._id);
   const { projects } = user;
-  const project = projects.id(req.params.projectID);
+  const project = projects.id(req.params.projectId);
   if (!project) return res.status(404).send("Given project doesn't exist");
 
   // Check if task for that project exist
@@ -66,22 +69,23 @@ router.put('/:projectID/:id', [auth, validateObjectId], async (req, res) => {
   // eslint-disable-next-line comma-dangle
 });
 
-router.delete('/:projectID/:id', [auth, validateObjectId], async (req, res) => {
+// Route for deleting the task
+router.delete('/:projectId/:id', [auth, validateObjectId], async (req, res) => {
   const user = await User.findById(req.user._id);
 
   const { projects } = user;
 
-  const project = projects.id(req.params.projectID);
+  const project = projects.id(req.params.projectId);
   if (!project) return res.status(404).send("Given project doesn't exist");
 
   const { tasks } = project;
   const task = tasks.id(req.params.id);
-  if (!task) return res.status(404).send('Task with given ID was not found');
+  if (!task) return res.status(404).send('Task with given Id was not found');
   task.remove();
 
-  const result = await user.save();
+  await user.save();
 
-  return res.send(result);
+  return res.send(task);
 });
 
 export default router;

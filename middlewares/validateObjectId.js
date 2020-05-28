@@ -12,7 +12,7 @@ const validateObjectId = (req, res, next) => {
 
 // For validating projectID route parameter in tasks route
 const validateProjectId = (req, res, next) => {
-  if (!mongoose.Types.ObjectId.isValid(req.params.projectID)) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.projectId)) {
     return res.status(404).send('Invalid Project ID.');
   }
   return next();
