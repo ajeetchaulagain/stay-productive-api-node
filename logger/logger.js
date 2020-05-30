@@ -1,4 +1,4 @@
-import winston from 'winston';
+import winston, { format } from 'winston';
 import 'winston-mongodb';
 import config from 'config';
 
@@ -8,12 +8,28 @@ export default winston.createLogger({
     new winston.transports.File({
       filename: 'logfile.log',
     }),
-    new winston.transports.Console(),
+    new winston.transports.Console({
+      format: format.combine(
+        format.timestamp(),
+        format.colorize(),
+        // eslint-disable-next-line comma-dangle
+        format.simple()
+      ),
+    }),
     new winston.transports.MongoDB({ db: config.get('logDB') }),
   ],
 });
 
 export const infoLogger = winston.createLogger({
   level: 'info',
-  transports: [new winston.transports.Console()],
+  transports: [
+    new winston.transports.Console({
+      format: format.combine(
+        format.timestamp(),
+        format.colorize(),
+        // eslint-disable-next-line comma-dangle
+        format.simple()
+      ),
+    }),
+  ],
 });

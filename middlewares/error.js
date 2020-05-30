@@ -1,7 +1,6 @@
 import winstonLogger from '../logger/logger';
 
-// eslint-disable-next-line no-unused-vars
-const error = (err, req, res, next) => {
+const error = (err, req, res) => {
   winstonLogger.error(err.message, err);
   res.status(500).send('Internal Server Eror');
 };
