@@ -8,7 +8,7 @@
     "test": "jest --watchAll --runInBand --detectOpenHandles --verbose",
     "lint": "eslint '**/*.js'",
     "test:coverage": "jest --coverage --runInBand --detectOpenHandles --verbose",
-    "test:coveralls": "jest --coverage --runInBand --detectOpenHandles --verbose && coveralls < coverage/lcov.info",
+    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
     "setDebug": "export DEBUG=app:*",
     "start:mongo": "brew services start mongodb-community",
     "stop:mongo": "brew services stop mongodb-community"
