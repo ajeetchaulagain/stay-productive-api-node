@@ -2,6 +2,8 @@ sudo: false
 
 language: node_js
 
+services: mongodb
+
 node_js:
   - '12.16.3'
 
