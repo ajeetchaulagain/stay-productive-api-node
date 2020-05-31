@@ -5,10 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon ./index.js --exec babel-node -e js",
-    "test": "jest",
+    "test": "jest --watchAll --runInBand --detectOpenHandles --verbose",
     "lint": "eslint '**/*.js'",
-    "test:coverage": "jest --coverage",
-    "test:coveralls": "jest --coverage && coveralls < coverage/lcov.info",
+    "test:coverage": "jest --coverage --runInBand --detectOpenHandles --verbose",
+    "test:coveralls": "jest --coverage --runInBand --detectOpenHandles --verbose && coveralls < coverage/lcov.info",
     "setDebug": "export DEBUG=app:*",
     "start:mongo": "brew services start mongodb-community",
     "stop:mongo": "brew services stop mongodb-community"
@@ -58,6 +58,7 @@
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.3",
     "jest": "^26.0.1",
-    "prettier": "^2.0.5"
+    "prettier": "^2.0.5",
+    "supertest": "^4.0.2"
   }
 }

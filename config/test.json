@@ -1,0 +1,5 @@
+{
+  "db": "mongodb://localhost/stay-productive-test",
+  "jwtPrivateKey": "12345",
+  "logDB": "mongodb://localhost/stay-productive-test-log"
+}
