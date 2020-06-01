@@ -7,7 +7,7 @@ const router = Router();
 
 const validate = (req) => {
   const schema = Joi.object({
-    email: Joi.string().required().max(255),
+    email: Joi.string().required().email(),
     password: Joi.string().required().max(1024),
   });
   return schema.validate(req);

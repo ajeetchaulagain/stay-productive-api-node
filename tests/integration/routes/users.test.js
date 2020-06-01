@@ -13,20 +13,20 @@ describe('/api/users', () => {
     let email;
     let password;
 
-    const setValidInputSample = () => {
+    const setValidUserRegistrationInput = () => {
       name = 'Test User';
       email = 'test@gmail.com';
       password = 'testPassword';
     };
 
     beforeEach(() => {
-      setValidInputSample();
+      setValidUserRegistrationInput();
     });
     // Valid user input. It will be changed in test as required
 
     // common execution function
     // eslint-disable-next-line arrow-body-style
-    const sendRequest = async () => {
+    const sendRequest = () => {
       return request(app).post('/api/users').send({ name, email, password });
     };
 
