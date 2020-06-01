@@ -63,7 +63,6 @@ describe('/api/auth', () => {
       expect(res.status).toBe(400);
     });
     it('should send auth token if login is valid', async () => {
-      // changing password
       saveUserToDB();
       const res = await sendRequest();
       expect(res.header['x-auth-token']).not.toBeNull();
