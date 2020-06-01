@@ -12,6 +12,7 @@ describe('auth middleware', () => {
 
   beforeEach(() => {});
 
+  // eslint-disable-next-line arrow-body-style
   const sendRequest = () => {
     return request(app).get('/api/projects').set('x-auth-token', token);
   };
