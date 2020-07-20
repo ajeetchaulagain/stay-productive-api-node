@@ -41,16 +41,23 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findById(req.user._id);
+  const { projects } = user;
 
   const project = user.projects.id(req.params.id);
   if (!project) return res.status(400).send('Given project doesnt exist');
+
+  const projectInDB = projects.find((p) => {
+    return p.name === req.body.name && p._id != req.params.id;
+  });
+
+  if (projectInDB)
+    return res.status(400).send(`${req.body.name} already exist`);
 
   project.name = req.body.name;
   await user.save();
 
   return res.send(project);
 });
-
 // Delete the project of id 'id'
 router.delete('/:id', [auth, validateObjectId], async (req, res) => {
   const user = await User.findById(req.user._id);
