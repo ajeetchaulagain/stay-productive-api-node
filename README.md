@@ -6,7 +6,6 @@
 
 # :gem: stay-productive-api-node
 
-This API development is in progress. I will update the readme later once the api development is completed.
 
 ## Documentation
 
