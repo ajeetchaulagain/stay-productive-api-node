@@ -47,12 +47,12 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   const project = user.projects.id(req.params.id);
   if (!project) return res.status(400).send('Given project doesnt exist');
 
-  const projectInDB = projects.find((p) => {
-    return p.name === req.body.name && p._id !== req.params.id;
-  });
+  const projectInDB = projects.find(
+    // eslint-disable-next-line comma-dangle
+    (p) => p.name === req.body.name && p._id !== req.params.id
+  );
 
-  if (projectInDB)
-    return res.status(400).send(`${req.body.name} already exist`);
+  if (projectInDB) res.status(400).send(`${req.body.name} already exist`);
 
   project.name = req.body.name;
   await user.save();
