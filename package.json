@@ -6,7 +6,7 @@
   "scripts": {
     "start": "nodemon ./index.js --exec babel-node -e js",
     "test": "jest --watchAll --runInBand --detectOpenHandles --verbose",
-    "lint": "eslint '**/*.js'",
+    "lint": "eslint '**/*.js' --fix",
     "test:coverage": "jest --coverage --runInBand --detectOpenHandles --verbose",
     "test:coveralls": "jest --coverage --runInBand --detectOpenHandles --forceExit && coveralls < coverage/lcov.info",
     "setDebug": "export DEBUG=app:*",
