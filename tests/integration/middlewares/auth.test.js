@@ -19,8 +19,8 @@ describe('auth middleware', () => {
 
   it('should return 401 if token is not provided', async () => {
     const user = new User({
-      name: 'Test User',
-      email: 'test@gmail.com',
+      name: 'Test User 2',
+      email: 'test2@gmail.com',
       password: 'testPassword',
     });
     await user.save();
