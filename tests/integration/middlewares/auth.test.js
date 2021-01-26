@@ -23,11 +23,11 @@ describe('auth middleware', () => {
   //   const res = await sendRequest();
   //   expect(res.status).toBe(401);
   // });
-  it('should return 400 if token is invalid', async () => {
-    token = 'wrongtoken';
-    const res = await sendRequest();
-    expect(res.status).toBe(400);
-  });
+  // it('should return 400 if token is invalid', async () => {
+  //   token = 'wrongtoken';
+  //   const res = await sendRequest();
+  //   expect(res.status).toBe(400);
+  // });
   // it('should return 400 if token is invalid', async () => {
   //   const user = new User({
   //     name: 'Test User',
