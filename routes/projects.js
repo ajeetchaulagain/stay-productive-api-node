@@ -22,6 +22,7 @@ router.post('/', auth, async (req, res) => {
   if (error) return res.status(400).send(error.details[0].message);
 
   const user = await User.findById(req.user._id);
+  if (!user) return res.status(401).send('User is not authorized');
 
   const { projects } = user;
   let project = projects.find((p) => p.name === req.body.name);
@@ -47,7 +48,7 @@ router.put('/:id', [auth, validateObjectId], async (req, res) => {
   if (!project) return res.status(400).send('Given project doesnt exist');
 
   const projectInDB = projects.find((p) => {
-    return p.name === req.body.name && p._id != req.params.id;
+    return p.name === req.body.name && p._id !== req.params.id;
   });
 
   if (projectInDB)
