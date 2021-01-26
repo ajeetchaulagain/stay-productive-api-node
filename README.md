@@ -5,7 +5,19 @@
 
 # :gem: stay-productive-api-node
 
+This is a backend API for project and task management application. The project is built with Node and Express. MongoDB is used as the Database.
 
-## Documentation
+## Instructions on running project
 
-Documentation will be updated soon!
+- Clone this repo and cd to project root directory
+- Install required npm packages - `npm i`
+- export value to environment variable "span_jwtPrivateKey"
+- Run the development server - `npm start`
+
+## Contribution
+
+If you find any issues or improvement regarding the code please consider submitting the pull request.
+
+## License
+
+This project is open source and available under [MIT License](LICENSE)
