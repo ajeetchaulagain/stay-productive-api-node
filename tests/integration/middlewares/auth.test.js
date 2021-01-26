@@ -18,6 +18,12 @@ describe('auth middleware', () => {
   };
 
   it('should return 401 if token is not provided', async () => {
+    const user = new User({
+      name: 'Test User',
+      email: 'test@gmail.com',
+      password: 'testPassword',
+    });
+    await user.save();
     // empty token is passed rather null
     token = '';
     const res = await sendRequest();
