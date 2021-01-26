@@ -19,7 +19,7 @@ describe('auth middleware', () => {
 
   it('should return 401 if token is not provided', async () => {
     // empty token is passed rather null
-    token = null;
+    token = '';
     const res = await sendRequest();
     expect(res.status).toBe(401);
   });
