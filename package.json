@@ -44,7 +44,7 @@
     "mongoose": "^5.11.12",
     "nodemon": "^2.0.7",
     "winston": "^3.3.3",
-    "winston-mongodb": "^5.0.5"
+    "winston-mongodb": "^5.0.6"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
